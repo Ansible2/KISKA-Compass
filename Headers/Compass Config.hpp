@@ -28,13 +28,13 @@
 #define FALSE 0
 
 //Default Arma DIK codes
-#include "\a3\ui_f\hpp\definedikcodes.inc"
+//#include "\a3\ui_f\hpp\definedikcodes.inc"
 
 //#End Region
 
 
 //COMPASS SETTINGS
-class LARs_UICompass_settings {
+class KISKA_compass_uiLayer_settings {
 
 	//Overall scale of the compass ui
 	scale = 1.35; //0.4
@@ -63,7 +63,7 @@ class LARs_UICompass_settings {
 class LARs_CompassIcons {
 
 	class testIcon {
-		icon = "LARs\Compass\ui\images\info_icon.paa";
+		icon = "images\info_icon.paa";
 
 		//optional
 		//color[] = {};
@@ -73,13 +73,13 @@ class LARs_CompassIcons {
 	};
 
 	class testIconFlash {
-		icon = "LARs\Compass\ui\images\info_icon.paa";
+		icon = "images\info_icon.paa";
 
 		//optional
 		color[] = COLOR_WHITE;
-		flashColor[] = COLOR_GREEN;
-		flashDuration = 1;
-		pingPong = FALSE;
+		//flashColor[] = COLOR_GREEN;
+		//flashDuration = 1;
+		//pingPong = FALSE;
 	};
 
 };

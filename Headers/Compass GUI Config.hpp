@@ -1,9 +1,13 @@
 
-#include "baseDefines.sqc"
-#include "gridMacros.sqc"
-#include "IDCs.sqc"
+//#include "baseDefines.hpp"
+#include "gridMacros.hpp"
+//#include "baseDefines2.hpp"
+#include "Compass IDCs.hpp"
+import ctrlMapEmpty;
+import ctrlStaticPicture;
+import ctrlStaticPictureKeepAspect;
 
-class LARs_UICompass {
+class KISKA_compass_uiLayer {
 	idd = COMPASS_IDD;
 
 	duration = 10e6;
@@ -31,7 +35,7 @@ class LARs_UICompass {
 					w = 0;
 					h = 0;
 
-					onDraw = "_this call LARs_Compass_fnc_update";
+					onDraw = "_this call KISKA_fnc_compass_update";
 				};
 
 				class compassBackground : ctrlStaticPicture {
