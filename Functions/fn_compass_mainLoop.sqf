@@ -23,6 +23,7 @@ Author:
 scriptName "KISKA_fnc_compass_mainLoop";
 
 #define INACTIVE_IDC -1
+#define SIMPLIFY_ANGLE(angle) (((angle) % 360) + 360) % 360;
 
 disableSerialization;
 
@@ -47,7 +48,7 @@ if ( KISKA_compass_show ) then {
 
 
 	private _cameraVectorDir = getCameraViewDirection player;
-	private _cameraHeading = ((((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1)) % 360) + 360) % 360;
+	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
 	private _posX = linearConversion[ 0, 360, _cameraHeading, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
 
 
@@ -68,40 +69,47 @@ if ( KISKA_compass_show ) then {
 		private _grpW = _ctrlPos select 2;
 		private _grpWDivided = _grpW / 2;
 
-		private ["_iconWidth","_iconHeight","_iconControl","_iconColor","_iconText","_relativeDir","_iconPos","_iconWidthDivided"];
+		private ["_iconWidth","_iconHeight","_iconControl","_iconColor","_iconText"/*,"_relativeDir"*/,"_iconPos","_iconWidthDivided","_camDirTo","_opposite"];
 
 		_iconMap apply {
 
 			_iconPos = _y select ICON_POS;
-			_relativeDir = call {
+			call {
 				if (_iconPos isEqualType []) exitWith {
-					[_cameraHeading - (player getDir _iconPos)] call CBA_fnc_simplifyAngle;
+					_camDirTo = SIMPLIFY_ANGLE(_cameraHeading - (player getDir _iconPos));
+					//_relativeDir = player getRelDir _iconPos;
 				};
 
 				if (_iconPos isEqualType objNull AND {!( isNull _iconPos )}) exitWith {
-					[_cameraHeading - (player getDir _iconPos)] call CBA_fnc_simplifyAngle;
+					_camDirTo = SIMPLIFY_ANGLE(_cameraHeading - (player getDir _iconPos));
+					//_relativeDir = player getRelDir _iconPos;
 				};
 
 				if (_iconPos isEqualType locationNull AND {!( isNull _iconPos )}) exitWith {
-					[_cameraHeading - (player getDir (locationPosition _iconPos))] call CBA_fnc_simplifyAngle;
+					private _locationPos = locationPosition _iconPos;
+					_camDirTo = SIMPLIFY_ANGLE(_cameraHeading - (player getDir _locationPos));
+					//_relativeDir = player getRelDir _locationPos;
 				};
 
 				if (_iconPos isEqualType "") exitWith {
 					private _markerPos = getMarkerPos _iconPos;
 					if ( _markerPos isNotEqualTo [0,0,0] ) then {
-						[_cameraHeading - (player getDir _markerPos)] call CBA_fnc_simplifyAngle;
+						_camDirTo = SIMPLIFY_ANGLE(_cameraHeading - (player getDir _markerPos));
+						//_relativeDir = player getRelDir _markerPos;
 					};
 				};
 
-				nil
+				//_relativeDir = nil;
+				_camDirTo = nil;
 			};
+
 
 			// only update if actually visible on compass range
 			if (
-				!(isNil "_relativeDir") AND
+				!(isNil "_camDirTo") AND
 				{
-					(_relativeDir >= 270) OR
-					{_relativeDir <= 90}
+					(_camDirTo >= 270) OR
+					{_camDirTo <= 90}
 				}
 			) then {
 				private _iconActive = _y select ICON_ACTIVE;
@@ -136,15 +144,16 @@ if ( KISKA_compass_show ) then {
 					};
 
 					// get the opposite angle
-					_relativeDir = (( _relativeDir + 180 ) % 360 );
-					_posX = linearConversion[ 90, 270, _relativeDir, 0, _grpW ];
+					//_relativeDir = (( _relativeDir + 180 ) % 360 );
+					//_posX = linearConversion[ 90, 270, _relativeDir, 0, _grpW ];
+
+					_opposite = SIMPLIFY_ANGLE(-_camDirTo + 180);
+					_posX = linearConversion[ 90, 270, _opposite, 0, _grpW ];
+					//hintSilent ([_camDirTo,_opposite,_posX] joinString "\n");
 					//_iconControl ctrlSetPosition [ _posX - _iconWidthDivided, _grpH - _iconHeight, _iconWidth, _iconHeight ];
 					_iconControl ctrlSetPositionX (_posX - _iconWidthDivided);
 					_iconControl ctrlCommit 0;
 				};
-
-
-
 			};
 
 		};
