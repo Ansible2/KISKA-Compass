@@ -21,8 +21,8 @@ Author:
 scriptName "KISKA_fnc_compass_updateConstants";
 
 
-missionNamespace setVariable ["KISKA_compass_iconW",pixelW * KISKA_compass_scale];
-missionNamespace setVariable ["KISKA_compass_iconH",pixelH * KISKA_compass_scale];
+missionNamespace setVariable ["KISKA_compass_iconW",KISKA_compass_iconPixelSize * pixelW * KISKA_compass_scale];
+missionNamespace setVariable ["KISKA_compass_iconH",KISKA_compass_iconPixelSize * pixelH * KISKA_compass_scale];
 
 missionNamespace setVariable ["KISKA_compass_iconWidth_active",KISKA_compass_iconW * KISKA_compass_activeIconMultiplier];
 missionNamespace setVariable ["KISKA_compass_iconHeight_active",KISKA_compass_iconH * KISKA_compass_activeIconMultiplier];

@@ -6,11 +6,13 @@ class KISKA {
 		class addCompassCBASettings {
 			preInit = 1;
 		};
+
 	/*
 		class compass_init {
 			postInit = 1;
 		};
 	*/
+		class compass_addIcon {};
 		class compass_mainLoop {};
 		class compass_updateColors {};
 		class compass_updateConstants {};

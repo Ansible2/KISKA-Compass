@@ -89,9 +89,11 @@ localNamespace setVariable ["KISKA_compass_centerMarkersCtrl",_compassCenterMark
 
 };
 
+private _mainCtrlGrp_pos = ctrlPosition _mainCompassCtrlGroup;
+localNamespace setVariable ["KISKA_compass_mainCtrlGroup_pos",_mainCtrlGrp_pos];
+
 (ctrlPosition _compassCenterMarkersCtrl) params[ "", "_ctrlY", "_ctrlW", "" ];
-(ctrlPosition _mainCompassCtrlGroup) params[ "", "", "_ctrlGrpW" ];
-_compassCenterMarkersCtrl ctrlSetPosition[ ( _ctrlGrpW / 2 ) - ( _ctrlW / 2 ), _ctrlY  ];
+_compassCenterMarkersCtrl ctrlSetPosition[ ( (_mainCtrlGrp_pos select 2) / 2 ) - ( _ctrlW / 2 ), _ctrlY  ];
 _compassCenterMarkersCtrl ctrlCommit 0;
 
 

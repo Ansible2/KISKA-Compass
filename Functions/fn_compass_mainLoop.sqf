@@ -39,63 +39,75 @@ if ( KISKA_compass_show ) then {
 	private _display = localNamespace getVariable "KISKA_compass_display";
 	private _compass = localNamespace getVariable "KISKA_compass_imageCtrl";
 
-	//hint "draw";
+/*
 	private _cameraPos = (getPosWorldVisual player) vectorAdd (getCameraViewDirection player);
 	private _dirTo = (getPosWorldVisual player) getDir _cameraPos;
 	private _posX = linearConversion[ 0, 360, _dirTo, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
+*/
 
-	(ctrlPosition _compass) params[ "_ctrlX", "_ctrlY" ];
-	_compass ctrlSetPosition[ -( _posX * pixelW ), _ctrlY ];
+
+	private _cameraVectorDir = getCameraViewDirection player;
+	private _cameraHeading = ((((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1)) % 360) + 360) % 360;
+	private _posX = linearConversion[ 0, 360, _cameraHeading, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
+
+
+	//private _compassCtrlPos = _compass;
+	//private _ctrlX = _compassCtrlPos select 0;
+	//private _ctrlY = _compassCtrlPos select 1;
+	//(ctrlPosition _compass) params[ "_ctrlX", "_ctrlY" ];
+	_compass ctrlSetPositionX -( _posX * pixelW );
 	_compass ctrlCommit 0;
 
 
 	// draw icons
-	if (count (localNamespace getVariable ["KISKA_compass_iconHashMap",createHashMap]) > 0) then {
+	private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
+	if (count _iconMap > 0) then {
 		//_iconW = KISKA_compass_iconW;
 		//_iconH = KISKA_compass_iconH;
-		(ctrlPosition _ctrlGrp) params[ "", "", "_grpW", "_grpH" ];
-
-		private ["_iconWidth","_iconHeight","_iconControl","_iconColor","_iconText","_relativeDir","_iconPos"];
+		private _ctrlPos = (localNamespace getVariable "KISKA_compass_mainCtrlGroup_pos");
+		private _grpW = _ctrlPos select 2;
 		private _grpWDivided = _grpW / 2;
-		private _iconWidthDivided = _iconWidth / 2;
 
-		KISKA_compass_iconHashMap apply {
+		private ["_iconWidth","_iconHeight","_iconControl","_iconColor","_iconText","_relativeDir","_iconPos","_iconWidthDivided"];
+
+		_iconMap apply {
 
 			_iconPos = _y select ICON_POS;
 			_relativeDir = call {
 				if (_iconPos isEqualType []) exitWith {
-					player getRelDir _iconPos
+					[_cameraHeading - (player getDir _iconPos)] call CBA_fnc_simplifyAngle;
 				};
 
 				if (_iconPos isEqualType objNull AND {!( isNull _iconPos )}) exitWith {
-					player getRelDir _iconPos
+					[_cameraHeading - (player getDir _iconPos)] call CBA_fnc_simplifyAngle;
 				};
 
 				if (_iconPos isEqualType locationNull AND {!( isNull _iconPos )}) exitWith {
-					player getRelDir (locationPosition _iconPos)
+					[_cameraHeading - (player getDir (locationPosition _iconPos))] call CBA_fnc_simplifyAngle;
 				};
 
 				if (_iconPos isEqualType "") exitWith {
 					private _markerPos = getMarkerPos _iconPos;
 					if ( _markerPos isNotEqualTo [0,0,0] ) then {
-						player getRelDir _markerPos
+						[_cameraHeading - (player getDir _markerPos)] call CBA_fnc_simplifyAngle;
 					};
 				};
 
-				-1
+				nil
 			};
 
 			// only update if actually visible on compass range
 			if (
-				_relativeDir isNotEqualTo -1 AND
+				!(isNil "_relativeDir") AND
 				{
-					((360 - _relativeDir) > 300) OR
-					{(0 + _relativeDir) < 60}
+					(_relativeDir >= 270) OR
+					{_relativeDir <= 90}
 				}
 			) then {
+				private _iconActive = _y select ICON_ACTIVE;
+				_iconWidth = [KISKA_compass_iconWidth_inactive,KISKA_compass_iconWidth_active] select _iconActive;
+				_iconWidthDivided = _iconWidth / 2;
 
-				_iconWidth = [KISKA_compass_iconWidth_inactive,KISKA_compass_iconWidth_active] select ICON_ACTIVE;
-				_iconHeight = [KISKA_compass_iconHeight_inactive,KISKA_compass_iconHeight_active] select ICON_ACTIVE;
 
 				_iconControl = _y select ICON_CTRL;
 				_iconText = _y select ICON_TEXT; // this is the icon's picture path
@@ -103,7 +115,10 @@ if ( KISKA_compass_show ) then {
 
 				if (isNull _iconControl) then {
 					_iconControl = _display ctrlCreate [ "ctrlActivePicture", INACTIVE_IDC, _ctrlGrp ];
-					_iconControl ctrlSetPosition [_grpWDivided - ( _iconWidth / 2 ), _grpH - _iconHeight, _iconWidth, _iconHeight];
+
+					_iconHeight = [KISKA_compass_iconHeight_inactive,KISKA_compass_iconHeight_active] select _iconActive;
+					private _grpH = _ctrlPos select 3;
+					_iconControl ctrlSetPosition [_grpWDivided - _iconWidthDivided, _grpH - _iconHeight, _iconWidth, _iconHeight];
 
 					_iconControl ctrlSetText _iconText;
 					_iconControl ctrlSetTextColor _iconColor;
@@ -119,13 +134,17 @@ if ( KISKA_compass_show ) then {
 					if ( (ctrlTextColor _iconControl) isNotEqualTo _iconColor) then {
 						_ctrl ctrlSetText _iconText;
 					};
+
+					// get the opposite angle
+					_relativeDir = (( _relativeDir + 180 ) % 360 );
+					_posX = linearConversion[ 90, 270, _relativeDir, 0, _grpW ];
+					//_iconControl ctrlSetPosition [ _posX - _iconWidthDivided, _grpH - _iconHeight, _iconWidth, _iconHeight ];
+					_iconControl ctrlSetPositionX (_posX - _iconWidthDivided);
+					_iconControl ctrlCommit 0;
 				};
 
-				_relativeDir = (( _relativeDir + 180 ) % 360 );
-				_posX = linearConversion[ 90, 270, _relativeDir, 0, _grpW ];
-				//ctrlPosition _ctrl params[ "_ctrlX", "_ctrlY" ];
-				_iconControl ctrlSetPosition[ _posX - _iconWidthDivided, _grpH - _iconHeight, _iconWidth, _iconHeight ];
-				_iconControl ctrlCommit 0;
+
+
 			};
 
 		};
