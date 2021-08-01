@@ -1,4 +1,5 @@
 
+/*
 params[ "_init" ];
 
 if ( _init == "postInit" ) exitWith {
@@ -22,3 +23,4 @@ LARs_compass_iconColor = [ getArray( missionConfigFile >> "KISKA_compass_uiLayer
 		_x setVariable[ "LARs_compass_iconIndex", _iconIndex ];
 	};
 }forEach ( allMissionObjects "" );
+*/

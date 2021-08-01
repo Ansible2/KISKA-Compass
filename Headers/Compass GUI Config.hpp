@@ -6,6 +6,7 @@
 import ctrlMapEmpty;
 import ctrlStaticPicture;
 import ctrlStaticPictureKeepAspect;
+import ctrlControlsGroupNoScrollbars;
 
 class KISKA_compass_uiLayer {
 	idd = COMPASS_IDD;
@@ -35,7 +36,7 @@ class KISKA_compass_uiLayer {
 					w = 0;
 					h = 0;
 
-					onDraw = "_this call KISKA_fnc_compass_update";
+					onDraw = "_this call KISKA_fnc_compass_mainLoop";
 				};
 
 				class compassBackground : ctrlStaticPicture {

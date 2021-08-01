@@ -18,7 +18,7 @@ Examples:
 Author:
 	Ansible2
 ---------------------------------------------------------------------------- */
-scriptName "KISKA_fnc_compass_update";
+scriptName "KISKA_fnc_compass_updateConstants";
 
 
 missionNamespace setVariable ["KISKA_compass_iconW",pixelW * KISKA_compass_scale];

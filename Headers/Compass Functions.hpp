@@ -13,7 +13,7 @@ class KISKA {
 	*/
 		class compass_mainLoop {};
 		class compass_updateColors {};
-		class compass_updateConstansts {};
+		class compass_updateConstants {};
 		class compass_configure {};
 	};
 };

@@ -24,36 +24,36 @@ scriptName "KISKA_fnc_compass_mainLoop";
 
 #define INACTIVE_IDC -1
 
-disableSerialization
+disableSerialization;
 
 params [
 	["_compassMapCtrl",controlNull,[controlNull]]
 ];
 
-_ctrlGrp = ctrlParentControlsGroup _compassMapCtrl;
-_display = ctrlParent _ctrlGrp;
-_compass = _ctrlGrp controlsGroupCtrl COMPASS_IMG;
-
-
-if ( localNamespace getVariable ["KISKA_compass_configed",false] ) then {
-	[ _compassMapCtrl ] call LARs_Compass_fnc_configure;
-};
-
 if ( KISKA_compass_show ) then {
+	if !( localNamespace getVariable ["KISKA_compass_configed",false] ) then {
+		[ _compassMapCtrl ] call KISKA_fnc_compass_configure;
+	};
+
+	private _ctrlGrp = localNamespace getVariable "KISKA_compass_mainCtrlGroup";
+	private _display = localNamespace getVariable "KISKA_compass_display";
+	private _compass = localNamespace getVariable "KISKA_compass_imageCtrl";
+
 	//hint "draw";
-	_cameraPos = getPosATL player vectorAdd getCameraViewDirection player;
-	_dir = getPosATL player getDir _cameraPos;
-	_posX = linearConversion[ 0, 360, _dir, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
+	private _cameraPos = (getPosWorldVisual player) vectorAdd (getCameraViewDirection player);
+	private _dirTo = (getPosWorldVisual player) getDir _cameraPos;
+	private _posX = linearConversion[ 0, 360, _dirTo, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
+
 	(ctrlPosition _compass) params[ "_ctrlX", "_ctrlY" ];
 	_compass ctrlSetPosition[ -( _posX * pixelW ), _ctrlY ];
 	_compass ctrlCommit 0;
 
 
 	// draw icons
-	if (count KISKA_compass_iconHashMap > 0) then {
+	if (count (localNamespace getVariable ["KISKA_compass_iconHashMap",createHashMap]) > 0) then {
 		//_iconW = KISKA_compass_iconW;
 		//_iconH = KISKA_compass_iconH;
-		ctrlPosition _ctrlGrp params[ "", "", "_grpW", "_grpH" ];
+		(ctrlPosition _ctrlGrp) params[ "", "", "_grpW", "_grpH" ];
 
 		private ["_iconWidth","_iconHeight","_iconControl","_iconColor","_iconText","_relativeDir","_iconPos"];
 		private _grpWDivided = _grpW / 2;

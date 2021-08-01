@@ -10,21 +10,93 @@ class EditorData
 	{
 		"3denEnhanced"
 	};
+	class ItemIDProvider
+	{
+		nextID=2;
+	};
 	class Camera
 	{
 		pos[]={4209.6235,15,1439.6729};
-		dir[]={-0.62318319,-0.17364819,-0.76255441};
-		up[]={-0.10988401,0.98480767,-0.13445891};
-		aside[]={-0.77431798,0,0.63279676};
+		dir[]={-0.5675025,-0.39323094,-0.72340202};
+		up[]={-0.24271251,0.91943973,-0.30938846};
+		aside[]={-0.78678566,0,0.61722642};
 	};
 };
 binarizationWanted=0;
-sourceName="KISKA%20compass";
+sourceName="kiska%20compass";
+addons[]=
+{
+	"A3_Characters_F"
+};
 class AddonsMetaData
 {
+	class List
+	{
+		items=1;
+		class Item0
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
 };
 randomSeed=5851073;
 class ScenarioData
 {
 	author="Ansible2";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		day=28;
+		hour=13;
+		minute=37;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+	};
+	class Entities
+	{
+		items=1;
+		class Item0
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={4197.8354,5.0014391,1423.7028};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=1;
+					type="B_soldier_AR_F";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=0;
+		};
+	};
 };

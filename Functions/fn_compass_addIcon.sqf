@@ -37,7 +37,11 @@ params [
 ];
 
 
-KISKA_compass_iconHashMap set [_iconId,
+if (isNil {localNamespace getVariable "KISKA_compass_iconHashMap") then {
+    localNamespace setVariable ["KISKA_compass_iconHashMap",createHashMap];
+};
+
+(localNamespace getVariable "KISKA_compass_iconHashMap") set [_iconId,
     [
         _iconText,
         _iconPos,
