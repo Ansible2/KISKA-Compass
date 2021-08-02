@@ -14,11 +14,12 @@ class KISKA_compass_uiLayer {
 	duration = 10e6;
 	fadeIn = 0;
 	fadeOut = 0;
+	onLoad = "_this spawn KISKA_fnc_compass_mainLoop";
 
 	class controls {
 
 		class compassGroup : ctrlControlsGroupNoScrollbars {
-			_idc = COMPASS_GRP;
+			idc = COMPASS_GRP;
 
 			x = safeZoneX + ( safeZoneW / 2 ) - (( 768 / 2 ) * pixelW );
 			y = safeZoneY + VERTICAL_GUTTER;
@@ -27,7 +28,7 @@ class KISKA_compass_uiLayer {
 
 
 			class controls {
-
+			/*
 				class emptyMap : ctrlMapEmpty {
 					idc = COMPASS_EMPTYMAP;
 
@@ -38,7 +39,7 @@ class KISKA_compass_uiLayer {
 
 					onDraw = "_this call KISKA_fnc_compass_mainLoop";
 				};
-
+			*/
 				class compassBackground : ctrlStaticPicture {
 					idc = COMPASS_BACK;
 

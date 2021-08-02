@@ -8,11 +8,14 @@
     {
         params ["_show"];
 
-        localNamespace setVariable ["KISKA_compass_configed",false];
+        private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
+        if (!isNull _display) then {
+            _display setVariable ["KISKA_compass_configed",false];
+        };
+
         if ( _show ) then {
             //KISKA_compass_configed = nil;
             ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutRsc [ "KISKA_compass_uiLayer", "PLAIN", -1, false ];
-
 
         } else {
             //localNamespace setVariable ["KISKA_compass_configed",false];
@@ -34,13 +37,14 @@
     nil,
     {
         // wait for initial configuration
-        if (localNamespace getVariable ["KISKA_compass_configed",false]) then {
-            localNamespace setVariable ["KISKA_compass_configed",false];
+        private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
+        if (_display getVariable ["KISKA_compass_configed",false]) then {
+            _display setVariable ["KISKA_compass_configed",false];
             ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
             ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutRsc [ "KISKA_compass_uiLayer", "PLAIN", -1, false ];
 
         };
-        
+
         call KISKA_fnc_compass_updateConstants;
     }
 ] call CBA_fnc_addSetting;

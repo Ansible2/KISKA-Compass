@@ -20,17 +20,20 @@ Author:
 ---------------------------------------------------------------------------- */
 scriptName "KISKA_fnc_compass_updateColors";
 
-private _compassImageCtrl = localNamespace getVariable ["KISKA_compass_imageCtrl",controlNull];
+private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
+if (isNull _display) exitWith {};
+
+private _compassImageCtrl = _display getVariable ["KISKA_compass_imageCtrl",controlNull];
 if !(isNull _compassImageCtrl) then {
     _compassImageCtrl ctrlSetTextColor KISKA_compass_mainColor;
 };
 
-private _compassBackgroundCtrl = localNamespace getVariable ["KISKA_compass_backgroundCtrl",controlNull];
+private _compassBackgroundCtrl = _display getVariable ["KISKA_compass_backgroundCtrl",controlNull];
 if !(isNull _compassBackgroundCtrl) then {
     _compassBackgroundCtrl ctrlSetTextColor KISKA_compass_backgroundColor;
 };
 
-private _compassCenterMarkersCtrl = localNamespace getVariable ["KISKA_compass_centerMarkersCtrl",controlNull];
+private _compassCenterMarkersCtrl = _display getVariable ["KISKA_compass_centerMarkersCtrl",controlNull];
 if !(isNull _compassCenterMarkersCtrl) then {
     _compassCenterMarkersCtrl ctrlSetTextColor KISKA_compass_centerColor;
 };

@@ -28,24 +28,17 @@ scriptName "KISKA_fnc_compass_mainLoop";
 disableSerialization;
 
 params [
-	["_display",displayNull,[displayNull]]
+	["_compassMapCtrl",controlNull,[controlNull]]
 ];
 
-
-_display displayAddEventHandler ["Unload", {
-	localNamespace setVariable ["KISKA_compass_display",displayNull];
-}];
-hint str _display;
-
-waitUntil {
-	if (!KISKA_compass_show OR (isNull _display)) exitWith {true};
-
-	if !( _display getVariable ["KISKA_compass_configed",false] ) then {
-		[ _display ] call KISKA_fnc_compass_configure;
+if ( KISKA_compass_show ) then {
+	if !( localNamespace getVariable ["KISKA_compass_configed",false] ) then {
+		[ _compassMapCtrl ] call KISKA_fnc_compass_configure;
 	};
 
-	private _ctrlGrp = _display getVariable "KISKA_compass_mainCtrlGroup";
-	private _compass = _display getVariable "KISKA_compass_imageCtrl";
+	private _ctrlGrp = localNamespace getVariable "KISKA_compass_mainCtrlGroup";
+	private _display = localNamespace getVariable "KISKA_compass_display";
+	private _compass = localNamespace getVariable "KISKA_compass_imageCtrl";
 
 /*
 	private _cameraPos = (getPosWorldVisual player) vectorAdd (getCameraViewDirection player);
@@ -65,7 +58,7 @@ waitUntil {
 	// draw icons
 	private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
 	if (count _iconMap > 0) then {
-		private _ctrlPos = _display getVariable "KISKA_compass_mainCtrlGroup_pos";
+		private _ctrlPos = localNamespace getVariable "KISKA_compass_mainCtrlGroup_pos";
 		private _grpW = _ctrlPos select 2;
 		private _grpWDivided = _grpW / 2;
 
@@ -144,13 +137,10 @@ waitUntil {
 					//hintSilent ([_camDirTo,_opposite,_posX] joinString "\n");
 					_iconControl ctrlSetPositionX (_posX - _iconWidthDivided);
 					_iconControl ctrlCommit 0;
-
 				};
 			};
 
 		};
+
 	};
-
-
-	false
 };
