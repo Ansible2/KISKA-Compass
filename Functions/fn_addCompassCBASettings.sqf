@@ -1,3 +1,4 @@
+#include "..\Headers\Icon Info Indexes.hpp"
 [
     "KISKA_compass_show",
     "CHECKBOX",
@@ -25,6 +26,40 @@
     }
 ] call CBA_fnc_addSetting;
 
+[
+    "KISKA_compass_showIcons",
+    "CHECKBOX",
+    "Show Icons On Compass",
+    "KISKA Compass",
+    true,
+    nil,
+    {
+        params ["_show"];
+    /*
+        private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
+        if (!isNull _display) then {
+            _display setVariable ["KISKA_compass_configed",false];
+        };
+    */
+        if !(_show) then {
+            private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
+
+            if (_iconMap isNotEqualTo []) then {
+                private _iconControl = controlNull;
+                _iconMap apply {
+                    _iconControl = _y select ICON_CTRL;
+
+                    if !(isNull _iconControl) then {
+                        ctrlDelete _iconControl;
+                        _y set [ICON_CTRL,controlNull];
+                    };
+                };
+            };
+
+        };
+    }
+] call CBA_fnc_addSetting;
+
 
 
 
@@ -36,16 +71,8 @@
     [0.01, 3, 0.4, 2],
     nil,
     {
-        // wait for initial configuration
-        private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
-        if (_display getVariable ["KISKA_compass_configed",false]) then {
-            _display setVariable ["KISKA_compass_configed",false];
-            ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
-            ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutRsc [ "KISKA_compass_uiLayer", "PLAIN", -1, false ];
-
-        };
-
         call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
     }
 ] call CBA_fnc_addSetting;
 [
@@ -57,6 +84,7 @@
     nil,
     {
         call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
     }
 ] call CBA_fnc_addSetting;
 [
@@ -68,6 +96,7 @@
     nil,
     {
         call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
     }
 ] call CBA_fnc_addSetting;
 [

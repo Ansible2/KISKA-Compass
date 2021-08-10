@@ -35,7 +35,6 @@ params [
 _display displayAddEventHandler ["Unload", {
 	localNamespace setVariable ["KISKA_compass_display",displayNull];
 }];
-hint str _display;
 
 waitUntil {
 	if (!KISKA_compass_show OR (isNull _display)) exitWith {true};
@@ -64,7 +63,7 @@ waitUntil {
 
 	// draw icons
 	private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
-	if (count _iconMap > 0) then {
+	if (KISKA_compass_showIcons AND {(count _iconMap) > 0}) then {
 		private _ctrlPos = _display getVariable "KISKA_compass_mainCtrlGroup_pos";
 		private _grpW = _ctrlPos select 2;
 		private _grpWDivided = _grpW / 2;

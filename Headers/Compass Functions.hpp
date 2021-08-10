@@ -14,6 +14,7 @@ class KISKA {
 	*/
 		class compass_addIcon {};
 		class compass_mainLoop {};
+		class compass_refresh {};
 		class compass_updateColors {};
 		class compass_updateConstants {};
 		class compass_configure {};
