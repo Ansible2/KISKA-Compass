@@ -55,7 +55,11 @@ waitUntil {
 
 	private _cameraVectorDir = getCameraViewDirection player;
 	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
-	private _posX = linearConversion[ 0, 360, _cameraHeading, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
+	//private _posX = linearConversion[ 0, 360, _cameraHeading, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
+  	//private _posX = linearConversion[ 0, 360, _cameraHeading, 370 * KISKA_compass_scale, 2960 * KISKA_compass_scale, true ]; // For compass_2, still wip
+	private _posX = linearConversion[ 0, 360, _cameraHeading, 1664 * KISKA_compass_scale, 3200 * KISKA_compass_scale, true ]; // For compass_2, still wip
+
+
 
 	_compass ctrlSetPositionX -( _posX * pixelW );
 	_compass ctrlCommit 0;
