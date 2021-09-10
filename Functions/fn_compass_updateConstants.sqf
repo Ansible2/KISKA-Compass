@@ -2,7 +2,7 @@
 Function: KISKA_fnc_compass_updateConstants
 
 Description:
-    Updates a number of constant global variables used for the KISKA compass
+    Updates a number of constant global variables used for the KISKA compass.
 
 Parameters:
 	NONE

@@ -48,8 +48,6 @@ private _overWritten = _hashMap set [_iconId,
     ]
 ];
 
-//localNamespace setVariable ["KISKA_compass_iconHashMap",_hashMap];
-
 if (isNil {localNamespace getVariable "KISKA_compass_iconHashMap"}) then {
     localNamespace setVariable ["KISKA_compass_iconHashMap",_hashMap];
 };

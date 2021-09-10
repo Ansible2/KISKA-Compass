@@ -1,4 +1,6 @@
 #include "..\Headers\Icon Info Indexes.hpp"
+
+
 [
     "KISKA_compass_show",
     "CHECKBOX",
@@ -15,11 +17,9 @@
         };
 
         if ( _show ) then {
-            //KISKA_compass_configed = nil;
             ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutRsc [ "KISKA_compass_uiLayer", "PLAIN", -1, false ];
 
         } else {
-            //localNamespace setVariable ["KISKA_compass_configed",false];
             ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
 
         };
@@ -35,12 +35,7 @@
     nil,
     {
         params ["_show"];
-    /*
-        private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
-        if (!isNull _display) then {
-            _display setVariable ["KISKA_compass_configed",false];
-        };
-    */
+
         if !(_show) then {
             private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
 

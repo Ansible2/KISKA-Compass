@@ -4,17 +4,17 @@
 Function: KISKA_fnc_compass_mainLoop
 
 Description:
-	Acts as the onDraw event for the compass, so this executes each frame.
+	Creates and then continues to execute a loop controlling the compass.
 
 Parameters:
-	0: _compassMapCtrl <CONTROL> - The ctrl for the compass map
+	0: _display <DISPLAY> - The display the compass will be on
 
 Returns:
 	NOTHING
 
 Examples:
     (begin example)
-		[_compassMapCtrl] call KISKA_fnc_compass_mainLoop;
+		[findDisplay 46] call KISKA_fnc_compass_mainLoop;
     (end)
 
 Author:
@@ -49,7 +49,7 @@ waitUntil {
 
 	private _cameraVectorDir = getCameraViewDirection player;
 	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
-	private _posX = linearConversion[ 0, 360, _cameraHeading, 1280 * KISKA_compass_scale, 2816 * KISKA_compass_scale, true ]; // For compass_2, still wip
+	private _posX = linearConversion[ 0, 360, _cameraHeading, 1280 * KISKA_compass_scale, 2816 * KISKA_compass_scale, true ];
 	_compass ctrlSetPositionX -( _posX * pixelW );
 	_compass ctrlCommit 0;
 

@@ -2,7 +2,7 @@
 Function: KISKA_fnc_compass_updateColors
 
 Description:
-    Updates the color of the ctrls for the KISKA compass
+    Updates the color of the ctrls for the KISKA compass.
 
 Parameters:
 	NONE

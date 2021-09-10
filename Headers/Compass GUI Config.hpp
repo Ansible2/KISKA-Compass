@@ -1,7 +1,4 @@
-
-//#include "baseDefines.hpp"
 #include "gridMacros.hpp"
-//#include "baseDefines2.hpp"
 #include "Compass IDCs.hpp"
 import ctrlMapEmpty;
 import ctrlStaticPicture;
@@ -28,18 +25,6 @@ class KISKA_compass_uiLayer {
 
 
 			class controls {
-			/*
-				class emptyMap : ctrlMapEmpty {
-					idc = COMPASS_EMPTYMAP;
-
-					x = 0;
-					y = 0;
-					w = 0;
-					h = 0;
-
-					onDraw = "_this call KISKA_fnc_compass_mainLoop";
-				};
-			*/
 				class compassBackground : ctrlStaticPicture {
 					idc = COMPASS_BACK;
 
@@ -48,7 +33,6 @@ class KISKA_compass_uiLayer {
 					w = 768 * pixelW;
 					h = 64 * pixelH;
 
-					//text = "#(rgb,8,8,3)color(1,1,1,1)";
 				};
 
 				class compassPicture : ctrlStaticPictureKeepAspect {
@@ -59,7 +43,6 @@ class KISKA_compass_uiLayer {
 					w = 4096 * pixelW;
 					h = 64 * pixelH;
 
-					//text = "LARs\Compass\ui\images\compass.paa";
 				};
 
 				class center : ctrlStaticPictureKeepAspect {
@@ -70,7 +53,6 @@ class KISKA_compass_uiLayer {
 					w = 16 * pixelW;
 					h = 64 * pixelH;
 
-					//text = "LARs\Compass\ui\images\center.paa";
 				};
 			};
 		};

@@ -1,6 +1,5 @@
 
 #define scaleFactor getNumber( configFile >> "uiScaleFactor" )
-//#define gridScale ( uiNamespace getVariable[ "LARs_pixelGrid_gridScale", 1 ] )
 
 //Changable grids based on user input
 #define GRID_X( num, gridScale ) ( pixelW * pixelGrid *((( num ) * ( gridScale )) / scaleFactor ))

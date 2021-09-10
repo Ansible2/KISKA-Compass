@@ -1,14 +1,14 @@
-
 #include "..\Headers\Compass IDCs.hpp"
 #include "..\Headers\gridMacros.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_configure
 
 Description:
-
+	Initializes several display namespace variables for the compass and sets
+	 up their images for the compass.
 
 Parameters:
-	NONE
+	0: _display <DISPLAY> - The display of the compass
 
 Returns:
 	NOTHING
