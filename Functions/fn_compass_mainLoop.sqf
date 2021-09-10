@@ -36,6 +36,7 @@ _display displayAddEventHandler ["Unload", {
 	localNamespace setVariable ["KISKA_compass_display",displayNull];
 }];
 
+
 waitUntil {
 	if (!KISKA_compass_show OR (isNull _display)) exitWith {true};
 
@@ -46,21 +47,9 @@ waitUntil {
 	private _ctrlGrp = _display getVariable "KISKA_compass_mainCtrlGroup";
 	private _compass = _display getVariable "KISKA_compass_imageCtrl";
 
-/*
-	private _cameraPos = (getPosWorldVisual player) vectorAdd (getCameraViewDirection player);
-	private _dirTo = (getPosWorldVisual player) getDir _cameraPos;
-	private _posX = linearConversion[ 0, 360, _dirTo, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
-*/
-
-
 	private _cameraVectorDir = getCameraViewDirection player;
 	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
-	//private _posX = linearConversion[ 0, 360, _cameraHeading, 1536 * KISKA_compass_scale, 3072 * KISKA_compass_scale, true ];
-  	//private _posX = linearConversion[ 0, 360, _cameraHeading, 370 * KISKA_compass_scale, 2960 * KISKA_compass_scale, true ]; // For compass_2, still wip
-	private _posX = linearConversion[ 0, 360, _cameraHeading, 1664 * KISKA_compass_scale, 3200 * KISKA_compass_scale, true ]; // For compass_2, still wip
-
-
-
+	private _posX = linearConversion[ 0, 360, _cameraHeading, 1280 * KISKA_compass_scale, 2816 * KISKA_compass_scale, true ]; // For compass_2, still wip
 	_compass ctrlSetPositionX -( _posX * pixelW );
 	_compass ctrlCommit 0;
 
