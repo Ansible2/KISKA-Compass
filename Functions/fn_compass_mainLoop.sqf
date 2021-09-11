@@ -1,5 +1,6 @@
 #include "..\Headers\Compass IDCs.hpp"
 #include "..\Headers\Icon Info Indexes.hpp"
+#include "..\Headers\Compass Globals.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_mainLoop
 
@@ -33,19 +34,19 @@ params [
 
 
 _display displayAddEventHandler ["Unload", {
-	localNamespace setVariable ["KISKA_compass_display",displayNull];
+	localNamespace setVariable [COMPASS_DISPLAY_VAR_STR,displayNull];
 }];
 
 
 waitUntil {
 	if (!KISKA_compass_show OR (isNull _display)) exitWith {true};
 
-	if !( _display getVariable ["KISKA_compass_configed",false] ) then {
+	if !( _display getVariable [COMPASS_CONFIGED_VAR_STR,false] ) then {
 		[ _display ] call KISKA_fnc_compass_configure;
 	};
 
-	private _ctrlGrp = _display getVariable "KISKA_compass_mainCtrlGroup";
-	private _compass = _display getVariable "KISKA_compass_imageCtrl";
+	private _ctrlGrp = _display getVariable COMPASS_MAIN_CTRL_GRP_VAR_STR;
+	private _compass = _display getVariable COMPASS_IMAGE_CTRL_VAR_STR;
 
 	private _cameraVectorDir = getCameraViewDirection player;
 	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
@@ -55,9 +56,9 @@ waitUntil {
 
 
 	// draw icons
-	private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
+	private _iconMap = localNamespace getVariable [COMPASS_ICON_MAP_VAR_STR,[]];
 	if (KISKA_compass_showIcons AND {(count _iconMap) > 0}) then {
-		private _ctrlPos = _display getVariable "KISKA_compass_mainCtrlGroup_pos";
+		private _ctrlPos = _display getVariable COMPASS_MAIN_CTRL_GRP_POS_VAR_STR;
 		private _grpW = _ctrlPos select 2;
 		private _grpWDivided = _grpW / 2;
 

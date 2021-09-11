@@ -32,7 +32,6 @@ class KISKA_compass_uiLayer {
 					y = 0;
 					w = 768 * pixelW;
 					h = 64 * pixelH;
-
 				};
 
 				class compassPicture : ctrlStaticPictureKeepAspect {
@@ -42,7 +41,6 @@ class KISKA_compass_uiLayer {
 					y = 0;
 					w = 4096 * pixelW;
 					h = 64 * pixelH;
-
 				};
 
 				class center : ctrlStaticPictureKeepAspect {
@@ -52,7 +50,6 @@ class KISKA_compass_uiLayer {
 					y = 0;
 					w = 16 * pixelW;
 					h = 64 * pixelH;
-
 				};
 			};
 		};

@@ -1,4 +1,4 @@
-//#include "..\Headers\Icon Info Indexes.hpp"
+#include "..\Headers\Compass Globals.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_addIcon
 
@@ -37,7 +37,7 @@ params [
 ];
 
 
-private _hashMap = localNamespace getVariable ["KISKA_compass_iconHashMap",createHashMap];
+private _hashMap = GET_COMPASS_ICON_MAP_DEFAULT;
 private _overWritten = _hashMap set [_iconId,
     [
         _iconText,
@@ -48,8 +48,8 @@ private _overWritten = _hashMap set [_iconId,
     ]
 ];
 
-if (isNil {localNamespace getVariable "KISKA_compass_iconHashMap"}) then {
-    localNamespace setVariable ["KISKA_compass_iconHashMap",_hashMap];
+if (isNil {GET_COMPASS_ICON_MAP}) then {
+    localNamespace setVariable [COMPASS_ICON_MAP_VAR_STR,_hashMap];
 };
 
 

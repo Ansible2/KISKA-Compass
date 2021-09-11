@@ -1,5 +1,6 @@
 #include "..\Headers\Compass IDCs.hpp"
 #include "..\Headers\gridMacros.hpp"
+#include "..\Headers\Compass Globals.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_configure
 
@@ -31,19 +32,19 @@ params [
 if (isNull _display) exitWith {};
 
 
-localNamespace setVariable ["KISKA_compass_display",_display];
+localNamespace setVariable [COMPASS_DISPLAY_VAR_STR,_display];
 
 private _mainCompassCtrlGroup = _display displayCtrl COMPASS_GRP;
-_display setVariable ["KISKA_compass_mainCtrlGroup",_mainCompassCtrlGroup];
+_display setVariable [COMPASS_MAIN_CTRL_GRP_VAR_STR,_mainCompassCtrlGroup];
 
 private _compassImageCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_IMG;
-_display setVariable ["KISKA_compass_imageCtrl",_compassImageCtrl];
+_display setVariable [COMPASS_IMAGE_CTRL_VAR_STR,_compassImageCtrl];
 
 private _compassBackgroundCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_BACK;
-_display setVariable ["KISKA_compass_backgroundCtrl",_compassBackgroundCtrl];
+_display setVariable [COMPASS_BACKGROUND_CTRL_VAR_STR,_compassBackgroundCtrl];
 
 private _compassCenterMarkersCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_CENTER;
-_display setVariable ["KISKA_compass_centerMarkersCtrl",_compassCenterMarkersCtrl];
+_display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersCtrl];
 
 
 
@@ -89,11 +90,11 @@ _display setVariable ["KISKA_compass_centerMarkersCtrl",_compassCenterMarkersCtr
 };
 
 private _mainCtrlGrp_pos = ctrlPosition _mainCompassCtrlGroup;
-_display setVariable ["KISKA_compass_mainCtrlGroup_pos",_mainCtrlGrp_pos];
+_display setVariable [COMPASS_MAIN_CTRL_GRP_POS_VAR_STR,_mainCtrlGrp_pos];
 
 (ctrlPosition _compassCenterMarkersCtrl) params[ "", "_ctrlY", "_ctrlW", "" ];
 _compassCenterMarkersCtrl ctrlSetPosition[ ( (_mainCtrlGrp_pos select 2) / 2 ) - ( _ctrlW / 2 ), _ctrlY  ];
 _compassCenterMarkersCtrl ctrlCommit 0;
 
 
-_display setVariable ["KISKA_compass_configed",true];
+_display setVariable [COMPASS_CONFIGED_VAR_STR,true];
