@@ -4,6 +4,7 @@ import ctrlMapEmpty;
 import ctrlStaticPicture;
 import ctrlStaticPictureKeepAspect;
 import ctrlControlsGroupNoScrollbars;
+#define COMPASS_USEABLE_RES_BY_2 1260
 
 class KISKA_compass_uiLayer {
 	idd = COMPASS_IDD;
@@ -18,9 +19,9 @@ class KISKA_compass_uiLayer {
 		class compassGroup : ctrlControlsGroupNoScrollbars {
 			idc = COMPASS_GRP;
 
-			x = safeZoneX + ( safeZoneW / 2 ) - (( 768 / 2 ) * pixelW );
+			x = safeZoneX + ( safeZoneW / 2 ) - (( COMPASS_USEABLE_RES_BY_2 / 2 ) * pixelW );
 			y = safeZoneY + VERTICAL_GUTTER;
-			w = 768 * pixelW;
+			w = COMPASS_USEABLE_RES_BY_2 * pixelW;
 			h = 64 * pixelH;
 
 
@@ -30,14 +31,14 @@ class KISKA_compass_uiLayer {
 
 					x = 0;
 					y = 0;
-					w = 768 * pixelW;
+					w = COMPASS_USEABLE_RES_BY_2 * pixelW;
 					h = 64 * pixelH;
 				};
 
 				class compassPicture : ctrlStaticPictureKeepAspect {
 					idc = COMPASS_IMG;
 
-					x = -( 1536 * pixelW );
+					x = -( 2610 * pixelW );
 					y = 0;
 					w = 4096 * pixelW;
 					h = 64 * pixelH;
@@ -46,7 +47,7 @@ class KISKA_compass_uiLayer {
 				class center : ctrlStaticPictureKeepAspect {
 					idc = COMPASS_CENTER;
 
-					x = pixelW * (( 768 / 2 ) - 8 );
+					x = pixelW * (( COMPASS_USEABLE_RES_BY_2 / 2 ) - 8 );
 					y = 0;
 					w = 16 * pixelW;
 					h = 64 * pixelH;
