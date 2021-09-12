@@ -1,3 +1,4 @@
+#include "..\Headers\Compass Globals.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_updateColors
 
