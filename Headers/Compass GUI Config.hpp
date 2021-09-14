@@ -4,7 +4,8 @@ import ctrlMapEmpty;
 import ctrlStaticPicture;
 import ctrlStaticPictureKeepAspect;
 import ctrlControlsGroupNoScrollbars;
-#define COMPASS_USEABLE_RES_BY_2 1260
+#define COMPASS_USEABLE_RES_BY_2 840
+#define COMPASS_PIXEL_HEIGHT 64
 
 class KISKA_compass_uiLayer {
 	idd = COMPASS_IDD;
@@ -20,9 +21,9 @@ class KISKA_compass_uiLayer {
 			idc = COMPASS_GRP;
 
 			x = safeZoneX + ( safeZoneW / 2 ) - (( COMPASS_USEABLE_RES_BY_2 / 2 ) * pixelW );
-			y = safeZoneY + VERTICAL_GUTTER;
+			y = safeZoneY + GRID_Y(1,8);
 			w = COMPASS_USEABLE_RES_BY_2 * pixelW;
-			h = 64 * pixelH;
+			h = COMPASS_PIXEL_HEIGHT * pixelH;
 
 
 			class controls {
@@ -32,7 +33,7 @@ class KISKA_compass_uiLayer {
 					x = 0;
 					y = 0;
 					w = COMPASS_USEABLE_RES_BY_2 * pixelW;
-					h = 64 * pixelH;
+					h = COMPASS_PIXEL_HEIGHT * pixelH;
 				};
 
 				class compassPicture : ctrlStaticPictureKeepAspect {
@@ -41,16 +42,16 @@ class KISKA_compass_uiLayer {
 					x = -( 2610 * pixelW );
 					y = 0;
 					w = 4096 * pixelW;
-					h = 64 * pixelH;
+					h = COMPASS_PIXEL_HEIGHT * pixelH;
 				};
 
 				class center : ctrlStaticPictureKeepAspect {
 					idc = COMPASS_CENTER;
 
-					x = pixelW * (( COMPASS_USEABLE_RES_BY_2 / 2 ) - 8 );
+					x = pixelW * COMPASS_USEABLE_RES_BY_2;
 					y = 0;
 					w = 16 * pixelW;
-					h = 64 * pixelH;
+					h = COMPASS_PIXEL_HEIGHT * pixelH;
 				};
 			};
 		};
