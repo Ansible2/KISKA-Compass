@@ -49,10 +49,10 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 
 
 [
-	[ _mainCompassCtrlGroup, [ true, true, true ] ],
-	[ _compassImageCtrl, [ false, true, true ], KISKA_compass_mainColor, "images\compass_19.paa" ],
-	[ _compassBackgroundCtrl, [ false, true, true ], KISKA_compass_backgroundColor, "#(rgb,8,8,3)color(1,1,1,1)" ],
-	[ _compassCenterMarkersCtrl, [ false, true, true ], KISKA_compass_centerColor, "images\center.paa" ]
+	[ _mainCompassCtrlGroup, true ],
+	[ _compassImageCtrl, false, KISKA_compass_mainColor, "images\compass_19.paa" ],
+	[ _compassBackgroundCtrl, false, KISKA_compass_backgroundColor, "#(rgb,8,8,3)color(1,1,1,1)" ],
+	[ _compassCenterMarkersCtrl, false, KISKA_compass_centerColor, "images\center.paa" ]
 ] apply {
 	_x params [
 		"_ctrl",
@@ -61,26 +61,25 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 		[ "_image", "" ]
 	];
 
-	_changePos params [
-		"_effectX",
-		"_effectW",
-		"_effectH"
-	];
 
 	(ctrlPosition _ctrl) params[ "_ctrlX", "_ctrlY", "_ctrlW", "_ctrlH" ];
+	if (_ctrlW isEqualTo 0) then {
+		_ctrlW = KISKA_compass_widthScale * pixelW;
+	};
 
-	if ( _effectW ) then {
-		_ctrlW = _ctrlW * KISKA_compass_scale;
-	};
-	if ( _effectH ) then {
-		_ctrlH = _ctrlH * KISKA_compass_scale;
-	};
-	if ( _effectX ) then {
+
+	// ctrlSetScale cuts off the image (I don't know why for now, so using this scaling instead)
+	// it also scales in such a way that is not ideal for the compass
+	_ctrlW = _ctrlW * KISKA_compass_scale;
+	_ctrlH = _ctrlH * KISKA_compass_scale;
+	if ( _changePos ) then {
 		_ctrlX = ( safeZoneX + ( safeZoneW / 2 ) - ( _ctrlW / 2 ) );
 	};
 
-	_ctrl ctrlSetPosition[ _ctrlX, _ctrlY, _ctrlW, _ctrlH ];
+	// using ctrlSetPosition instead of individual commands because setting them with those causes the compass to be offset from center
+	_ctrl ctrlSetPosition [_ctrlX,_ctrlY,_ctrlW,_ctrlH];
 	_ctrl ctrlCommit 0;
+
 
 	if ( _image isNotEqualTo "" ) then {
 		_ctrl ctrlSetText _image;
@@ -89,11 +88,16 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 
 };
 
+
 private _mainCtrlGrp_pos = ctrlPosition _mainCompassCtrlGroup;
 _display setVariable [COMPASS_MAIN_CTRL_GRP_POS_VAR_STR,_mainCtrlGrp_pos];
 
+private _mainCtrlGrp_posX_by2 = (_mainCtrlGrp_pos select 2) / 2;
+_compassCenterMarkersCtrl ctrlSetPositionX _mainCtrlGrp_posX_by2;
+
 (ctrlPosition _compassCenterMarkersCtrl) params[ "", "_ctrlY", "_ctrlW", "" ];
-_compassCenterMarkersCtrl ctrlSetPosition[ ( (_mainCtrlGrp_pos select 2) / 2 ) - ( _ctrlW / 2 ), _ctrlY  ];
+_compassCenterMarkersCtrl ctrlSetPosition[ _mainCtrlGrp_posX_by2 - ( _ctrlW / 2 ), _ctrlY  ];
+
 _compassCenterMarkersCtrl ctrlCommit 0;
 
 

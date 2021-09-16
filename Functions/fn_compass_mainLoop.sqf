@@ -1,6 +1,7 @@
 #include "..\Headers\Compass IDCs.hpp"
 #include "..\Headers\Icon Info Indexes.hpp"
 #include "..\Headers\Compass Globals.hpp"
+#include "..\Headers\Compass Image Resolutions.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_mainLoop
 
@@ -51,10 +52,15 @@ waitUntil {
 	private _cameraVectorDir = getCameraViewDirection player;
 	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
 	//private _posX = linearConversion[ 0, 360, _cameraHeading, 1280 * KISKA_compass_scale, 2816 * KISKA_compass_scale, true ];
-	private _posX = linearConversion[ 0, 360, _cameraHeading, (158 + 210) * KISKA_compass_scale, (2678 + 210) * KISKA_compass_scale, true ];
+	private _pixelOffset = ((COMPASS_USEABLE_WIDTH / 2) - KISKA_compass_widthScale) / 2;
+	private _posX = linearConversion[ 0, 360, _cameraHeading, (MIN_COMPASS_WIDTH + _pixelOffset) * KISKA_compass_scale, (MAX_COMPASS_WIDTH + _pixelOffset) * KISKA_compass_scale, true ];
 
-	_compass ctrlSetPositionX -( _posX * pixelW );
+	_compass ctrlSetPositionX -( _posX * pixelW ); // scroll the compass
 	_compass ctrlCommit 0;
+
+
+
+
 
 
 	// draw icons

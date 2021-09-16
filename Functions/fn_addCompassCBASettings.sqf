@@ -61,15 +61,29 @@
 [
     "KISKA_compass_scale",
     "SLIDER",
-    "Compass Scale",
+    "Overall Compass Scale",
     ["KISKA Compass", "Scaling"],
-    [0.01, 3, 0.4, 2],
+    [0.01, 3, 1.25, 2],
     nil,
     {
         call KISKA_fnc_compass_updateConstants;
         call KISKA_fnc_compass_refresh;
     }
 ] call CBA_fnc_addSetting;
+
+[
+    "KISKA_compass_widthScale",
+    "SLIDER",
+    "Compass Width Scale",
+    ["KISKA Compass", "Scaling"],
+    [630, 1260, 840, 0],
+    nil,
+    {
+        call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
+    }
+] call CBA_fnc_addSetting;
+
 [
     "KISKA_compass_iconPixelSize",
     "SLIDER",
@@ -82,6 +96,7 @@
         call KISKA_fnc_compass_refresh;
     }
 ] call CBA_fnc_addSetting;
+
 [
     "KISKA_compass_activeIconMultiplier",
     "SLIDER",
@@ -94,6 +109,7 @@
         call KISKA_fnc_compass_refresh;
     }
 ] call CBA_fnc_addSetting;
+
 [
     "KISKA_compass_inactiveIconMultiplier",
     "SLIDER",
