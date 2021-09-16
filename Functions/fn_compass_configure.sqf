@@ -69,7 +69,7 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 
 
 	// ctrlSetScale cuts off the image (I don't know why for now, so using this scaling instead)
-	// it also scales in such a way that is not ideal for the compass
+	// ctrlSetScale also scales in such a way that is not ideal for the compass
 	_ctrlW = _ctrlW * KISKA_compass_scale;
 	_ctrlH = _ctrlH * KISKA_compass_scale;
 	if ( _changePos ) then {
