@@ -1,3 +1,4 @@
+#include "..\Headers\Compass Image Resolutions.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_updateConstants
 
@@ -19,6 +20,10 @@ Author:
 	Ansible2
 ---------------------------------------------------------------------------- */
 scriptName "KISKA_fnc_compass_updateConstants";
+
+private _pixelOffset = ((COMPASS_USEABLE_WIDTH / 2) - KISKA_compass_widthScale) / 2;
+missionNamespace setVariable ["KISKA_compass_pixelX_min",(MIN_COMPASS_WIDTH + _pixelOffset) * KISKA_compass_scale];
+missionNamespace setVariable ["KISKA_compass_pixelX_max",(MAX_COMPASS_WIDTH + _pixelOffset) * KISKA_compass_scale];
 
 
 missionNamespace setVariable ["KISKA_compass_iconW",KISKA_compass_iconPixelSize * pixelW * KISKA_compass_scale];

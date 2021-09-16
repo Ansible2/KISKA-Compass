@@ -92,12 +92,11 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 private _mainCtrlGrp_pos = ctrlPosition _mainCompassCtrlGroup;
 _display setVariable [COMPASS_MAIN_CTRL_GRP_POS_VAR_STR,_mainCtrlGrp_pos];
 
-private _mainCtrlGrp_posX_by2 = (_mainCtrlGrp_pos select 2) / 2;
-_compassCenterMarkersCtrl ctrlSetPositionX _mainCtrlGrp_posX_by2;
 
+// position center marker at the center of the control group
+private _mainCtrlGrp_posX_by2 = (_mainCtrlGrp_pos select 2) / 2;
 (ctrlPosition _compassCenterMarkersCtrl) params[ "", "_ctrlY", "_ctrlW", "" ];
 _compassCenterMarkersCtrl ctrlSetPosition[ _mainCtrlGrp_posX_by2 - ( _ctrlW / 2 ), _ctrlY  ];
-
 _compassCenterMarkersCtrl ctrlCommit 0;
 
 

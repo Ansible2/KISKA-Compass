@@ -51,9 +51,8 @@ waitUntil {
 
 	private _cameraVectorDir = getCameraViewDirection player;
 	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
-	//private _posX = linearConversion[ 0, 360, _cameraHeading, 1280 * KISKA_compass_scale, 2816 * KISKA_compass_scale, true ];
-	private _pixelOffset = ((COMPASS_USEABLE_WIDTH / 2) - KISKA_compass_widthScale) / 2;
-	private _posX = linearConversion[ 0, 360, _cameraHeading, (MIN_COMPASS_WIDTH + _pixelOffset) * KISKA_compass_scale, (MAX_COMPASS_WIDTH + _pixelOffset) * KISKA_compass_scale, true ];
+	// convert heading to actual pixel position of compass control
+	private _posX = linearConversion[ 0, 360, _cameraHeading, KISKA_compass_pixelX_min, KISKA_compass_pixelX_max, true ];
 
 	_compass ctrlSetPositionX -( _posX * pixelW ); // scroll the compass
 	_compass ctrlCommit 0;
