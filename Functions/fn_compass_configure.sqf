@@ -1,5 +1,4 @@
 #include "..\Headers\Compass IDCs.hpp"
-//#include "..\Headers\gridMacros.hpp"
 #include "..\Headers\Compass Globals.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_configure
