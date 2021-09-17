@@ -103,8 +103,8 @@ waitUntil {
 			if (
 				!(isNil "_camDirTo") AND
 				{
-					(_camDirTo >= 270) OR
-					{_camDirTo <= 90}
+					(_camDirTo >= KISKA_compass_shownAngle_max) OR
+					{_camDirTo <= KISKA_compass_shownAngle_min}
 				}
 			) then {
 				private _iconActive = _y select ICON_ACTIVE;
@@ -140,8 +140,8 @@ waitUntil {
 
 					// get the opposite angle
 					_opposite = SIMPLIFY_ANGLE(-_camDirTo + 180);
-					_posX = linearConversion[ 90, 270, _opposite, 0, _grpW ];
-					//hintSilent ([_camDirTo,_opposite,_posX] joinString "\n");
+					_posX = linearConversion[ KISKA_compass_shownAngle_min, KISKA_compass_shownAngle_max, _opposite, 0, _grpW, true ];
+				//	hintSilent ([_camDirTo,_opposite,_posX,_offset] joinString "\n");
 					_iconControl ctrlSetPositionX (_posX - _iconWidthDivided);
 					_iconControl ctrlCommit 0;
 
