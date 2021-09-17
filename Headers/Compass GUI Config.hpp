@@ -22,9 +22,7 @@ class KISKA_compass_uiLayer {
 		class compassGroup : ctrlControlsGroupNoScrollbars {
 			idc = COMPASS_GRP;
 
-			//x = safeZoneX + ( safeZoneW / 2 ) - (( COMPASS_USEABLE_RES_BY_2 / 2 ) * pixelW );
-			y = safeZoneY + GRID_Y(1,8);
-			//w = COMPASS_USEABLE_RES_BY_2 * pixelW;
+			y = 0;
 			w = 0;
 			h = COMPASS_IMAGE_RES_H * pixelH;
 
@@ -35,8 +33,7 @@ class KISKA_compass_uiLayer {
 
 					x = 0;
 					y = 0;
-					w = 0; 
-					//w = COMPASS_USEABLE_RES_BY_2 * pixelW;
+					w = 0;
 					h = COMPASS_IMAGE_RES_H * pixelH;
 				};
 
@@ -52,7 +49,6 @@ class KISKA_compass_uiLayer {
 				class center : ctrlStaticPictureKeepAspect {
 					idc = COMPASS_CENTER;
 
-					//x = pixelW * COMPASS_USEABLE_RES_BY_2;
 					y = 0;
 					w = COMPASS_CENTER_MARKER_RES_W * pixelW;
 					h = COMPASS_IMAGE_RES_H * pixelH;

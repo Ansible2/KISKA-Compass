@@ -38,6 +38,27 @@ _display displayAddEventHandler ["Unload", {
 	localNamespace setVariable [COMPASS_DISPLAY_VAR_STR,displayNull];
 }];
 
+private [
+	"_ctrlGrp",
+	"_compass",
+	"_cameraVectorDir",
+	"_cameraHeading",
+	"_posX",
+	"_grpW",
+	"_grpWDivided",
+	"_ctrlPos",
+	"_iconMap",
+	"_iconWidth",
+	"_iconHeight",
+	"_iconControl",
+	"_iconColor",
+	"_iconText",
+	"_iconPos",
+	"_iconWidthDivided",
+	"_camDirTo",
+	"_opposite"
+];
+
 
 waitUntil {
 	if (!KISKA_compass_show OR (isNull _display)) exitWith {true};
@@ -46,13 +67,13 @@ waitUntil {
 		[ _display ] call KISKA_fnc_compass_configure;
 	};
 
-	private _ctrlGrp = _display getVariable COMPASS_MAIN_CTRL_GRP_VAR_STR;
-	private _compass = _display getVariable COMPASS_IMAGE_CTRL_VAR_STR;
+	_ctrlGrp = _display getVariable COMPASS_MAIN_CTRL_GRP_VAR_STR;
+	_compass = _display getVariable COMPASS_IMAGE_CTRL_VAR_STR;
 
-	private _cameraVectorDir = getCameraViewDirection player;
-	private _cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
+	_cameraVectorDir = getCameraViewDirection player;
+	_cameraHeading = SIMPLIFY_ANGLE((_cameraVectorDir select 0) atan2 (_cameraVectorDir select 1));
 	// convert heading to actual pixel position of compass control
-	private _posX = linearConversion[ 0, 360, _cameraHeading, KISKA_compass_pixelX_min, KISKA_compass_pixelX_max, true ];
+	_posX = linearConversion[ 0, 360, _cameraHeading, KISKA_compass_pixelX_min, KISKA_compass_pixelX_max, true ];
 
 	_compass ctrlSetPositionX -( _posX * pixelW ); // scroll the compass
 	_compass ctrlCommit 0;
@@ -63,13 +84,12 @@ waitUntil {
 
 
 	// draw icons
-	private _iconMap = localNamespace getVariable [COMPASS_ICON_MAP_VAR_STR,[]];
+	_iconMap = localNamespace getVariable [COMPASS_ICON_MAP_VAR_STR,[]];
 	if (KISKA_compass_showIcons AND {(count _iconMap) > 0}) then {
-		private _ctrlPos = _display getVariable COMPASS_MAIN_CTRL_GRP_POS_VAR_STR;
-		private _grpW = _ctrlPos select 2;
-		private _grpWDivided = _grpW / 2;
+		_ctrlPos = _display getVariable COMPASS_MAIN_CTRL_GRP_POS_VAR_STR;
+		_grpW = _ctrlPos select 2;
+		_grpWDivided = _grpW / 2;
 
-		private ["_iconWidth","_iconHeight","_iconControl","_iconColor","_iconText","_iconPos","_iconWidthDivided","_camDirTo","_opposite"];
 
 		_iconMap apply {
 
@@ -98,23 +118,22 @@ waitUntil {
 				_camDirTo = nil;
 			};
 
-
+			_iconControl = _y select ICON_CTRL;
 			// only update if actually visible on compass range
 			if (
 				!(isNil "_camDirTo") AND
 				{
-					(_camDirTo >= KISKA_compass_shownAngle_max) OR
-					{_camDirTo <= KISKA_compass_shownAngle_min}
+					(_camDirTo >= KISKA_compass_iconAngle_max) OR
+					{_camDirTo <= KISKA_compass_iconAngle_min}
 				}
 			) then {
 				private _iconActive = _y select ICON_ACTIVE;
 				_iconWidth = [KISKA_compass_iconWidth_inactive,KISKA_compass_iconWidth_active] select _iconActive;
+
 				_iconWidthDivided = _iconWidth / 2;
-
-
-				_iconControl = _y select ICON_CTRL;
 				_iconText = _y select ICON_TEXT; // this is the icon's picture path
 				_iconColor = _y select ICON_COLOR;
+
 
 				if (isNull _iconControl) then {
 					_iconControl = _display ctrlCreate [ "ctrlActivePicture", INACTIVE_IDC, _ctrlGrp ];
@@ -130,6 +149,8 @@ waitUntil {
 					_y set [ ICON_CTRL, _iconControl ];
 
 				} else {
+					_iconControl ctrlShow true;
+
 					if ( (ctrlText _iconControl) isNotEqualTo _iconText) then {
 						_iconControl ctrlSetText _iconText;
 					};
@@ -141,11 +162,13 @@ waitUntil {
 					// get the opposite angle
 					_opposite = SIMPLIFY_ANGLE(-_camDirTo + 180);
 					_posX = linearConversion[ KISKA_compass_shownAngle_min, KISKA_compass_shownAngle_max, _opposite, 0, _grpW, true ];
-				//	hintSilent ([_camDirTo,_opposite,_posX,_offset] joinString "\n");
+				//	hintSilent ([_camDirTo,_opposite,KISKA_compass_shownAngle_max,KISKA_compass_shownAngle_min] joinString "\n");
 					_iconControl ctrlSetPositionX (_posX - _iconWidthDivided);
 					_iconControl ctrlCommit 0;
 
 				};
+			} else {
+				_iconControl ctrlShow false;
 			};
 
 		};

@@ -1,6 +1,8 @@
 #include "..\Headers\Icon Info Indexes.hpp"
 
-
+/* ----------------------------------------------------------------------------
+    Toggle Options
+---------------------------------------------------------------------------- */
 [
     "KISKA_compass_show",
     "CHECKBOX",
@@ -57,13 +59,15 @@
 
 
 
-
+/* ----------------------------------------------------------------------------
+    Scaling
+---------------------------------------------------------------------------- */
 [
     "KISKA_compass_scale",
     "SLIDER",
     "Overall Compass Scale",
     ["KISKA Compass", "Scaling"],
-    [0.01, 3, 1.25, 2],
+    [0.01, 3, 1.25, 0, true],
     nil,
     {
         call KISKA_fnc_compass_updateConstants;
@@ -74,9 +78,22 @@
 [
     "KISKA_compass_widthScale",
     "SLIDER",
-    "Compass Width Scale",
+    ["Compass Width Scale","Determines how many 'pixels' of the compass are shown at once. Essentially, 1260 means you will see 180 degrees of compass at once and 630 means you will see 90 degrees"],
     ["KISKA Compass", "Scaling"],
     [630, 1260, 840, 0],
+    nil,
+    {
+        call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
+    }
+] call CBA_fnc_addSetting;
+
+[
+    "KISKA_compass_y_offset",
+    "SLIDER",
+    ["Vertical Position Offset", "Adjusts how fart beneath the top of the screen your compass is."],
+    ["KISKA Compass", "Scaling"],
+    [0, 100, 1, 0],
     nil,
     {
         call KISKA_fnc_compass_updateConstants;
@@ -124,8 +141,9 @@
 
 
 
-
-
+/* ----------------------------------------------------------------------------
+    Colors
+---------------------------------------------------------------------------- */
 [
     "KISKA_compass_mainColor",
     "COLOR",

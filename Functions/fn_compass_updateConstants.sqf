@@ -28,6 +28,8 @@ missionNamespace setVariable ["KISKA_compass_pixelX_max",(MAX_COMPASS_WIDTH + _p
 private _offset = linearConversion[ 630, 1260, KISKA_compass_widthScale, 0, 45, true ];
 missionNamespace setVariable ["KISKA_compass_shownAngle_min",135 - _offset];
 missionNamespace setVariable ["KISKA_compass_shownAngle_max",225 + _offset];
+missionNamespace setVariable ["KISKA_compass_iconAngle_min",45 + _offset];
+missionNamespace setVariable ["KISKA_compass_iconAngle_max",315 - _offset];
 
 
 missionNamespace setVariable ["KISKA_compass_iconW",KISKA_compass_iconPixelSize * pixelW * KISKA_compass_scale];

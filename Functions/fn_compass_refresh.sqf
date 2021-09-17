@@ -31,9 +31,10 @@ if (isNull _display) exitWith {
 
 if (_display getVariable [COMPASS_CONFIGED_VAR_STR,false]) then {
     _display setVariable [COMPASS_CONFIGED_VAR_STR,false];
-    //ctrlCreate [, , controlsGroup]
+
     (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
     (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutRsc [ COMPASS_LAYER_NAME, "PLAIN", -1, false ];
+
     true
 
 } else {

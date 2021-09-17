@@ -1,5 +1,5 @@
 #include "..\Headers\Compass IDCs.hpp"
-#include "..\Headers\gridMacros.hpp"
+//#include "..\Headers\gridMacros.hpp"
 #include "..\Headers\Compass Globals.hpp"
 /* ----------------------------------------------------------------------------
 Function: KISKA_fnc_compass_configure
@@ -74,6 +74,7 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 	_ctrlH = _ctrlH * KISKA_compass_scale;
 	if ( _changePos ) then {
 		_ctrlX = ( safeZoneX + ( safeZoneW / 2 ) - ( _ctrlW / 2 ) );
+		_ctrlY = safeZoneY + ((pixelH * pixelGrid) * KISKA_compass_y_offset)
 	};
 
 	// using ctrlSetPosition instead of individual commands because setting them with those causes the compass to be offset from center
