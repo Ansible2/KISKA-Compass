@@ -58,6 +58,43 @@
 ] call CBA_fnc_addSetting;
 
 
+/* ----------------------------------------------------------------------------
+    Appearance
+---------------------------------------------------------------------------- */
+private _compassListArray = [
+    configFile >> "KISKA_compass" >> "compass",
+    "KISKA_compass_configs"
+] call KISKA_fnc_compass_parseConfig;
+[
+    "KISKA_compass_image",
+    "LIST",
+    "Compass",
+    ["KISKA Compass", "Appearance"],
+    _compassListArray,
+    nil,
+    {
+        call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
+    }
+] call CBA_fnc_addSetting;
+
+private _compassCenterListArray = [
+    configFile >> "KISKA_compass" >> "center",
+    "KISKA_compass_centerconfigs"
+] call KISKA_fnc_compass_parseConfig;
+[
+    "KISKA_compass_center_image",
+    "LIST",
+    "Center Marker",
+    ["KISKA Compass", "Appearance"],
+    _compassCenterListArray,
+    nil,
+    {
+        call KISKA_fnc_compass_updateConstants;
+        call KISKA_fnc_compass_refresh;
+    }
+] call CBA_fnc_addSetting;
+
 
 /* ----------------------------------------------------------------------------
     Scaling

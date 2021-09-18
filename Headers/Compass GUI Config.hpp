@@ -1,13 +1,9 @@
-#include "gridMacros.hpp"
 #include "Compass IDCs.hpp"
 #include "Compass Image Resolutions.hpp"
 
 import ctrlStaticPicture;
 import ctrlStaticPictureKeepAspect;
 import ctrlControlsGroupNoScrollbars;
-
-#define COMPASS_USEABLE_RES_BY_2 840
-
 
 class KISKA_compass_uiLayer {
 	idd = COMPASS_IDD;
