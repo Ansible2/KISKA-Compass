@@ -1,4 +1,5 @@
 #include "..\Headers\Icon Info Indexes.hpp"
+#include "..\Headers\Compass Globals.hpp"
 
 /* ----------------------------------------------------------------------------
     Toggle Options
@@ -13,16 +14,16 @@
     {
         params ["_show"];
 
-        private _display = localNamespace getVariable ["KISKA_compass_display",displayNull];
+        private _display = GET_COMPASS_DISPLAY;
         if (!isNull _display) then {
-            _display setVariable ["KISKA_compass_configed",false];
+            _display setVariable [COMPASS_CONFIGED_VAR_STR,false];
         };
 
         if ( _show ) then {
-            ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutRsc [ "KISKA_compass_uiLayer", "PLAIN", -1, false ];
+            (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutRsc [ COMPASS_LAYER_NAME, "PLAIN", -1, false ];
 
         } else {
-            ("KISKA_compass_uiLayer" call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
+            (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
 
         };
     }
@@ -39,7 +40,7 @@
         params ["_show"];
 
         if !(_show) then {
-            private _iconMap = localNamespace getVariable ["KISKA_compass_iconHashMap",[]];
+            private _iconMap = localNamespace getVariable [COMPASS_ICON_MAP_VAR_STR,[]];
 
             if (_iconMap isNotEqualTo []) then {
                 private _iconControl = controlNull;

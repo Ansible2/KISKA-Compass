@@ -33,16 +33,16 @@ if (isNull _display) exitWith {};
 
 localNamespace setVariable [COMPASS_DISPLAY_VAR_STR,_display];
 
-private _mainCompassCtrlGroup = _display displayCtrl COMPASS_GRP;
+private _mainCompassCtrlGroup = _display displayCtrl COMPASS_GRP_IDC;
 _display setVariable [COMPASS_MAIN_CTRL_GRP_VAR_STR,_mainCompassCtrlGroup];
 
-private _compassImageCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_IMG;
+private _compassImageCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_IMG_IDC;
 _display setVariable [COMPASS_IMAGE_CTRL_VAR_STR,_compassImageCtrl];
 
-private _compassBackgroundCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_BACK;
+private _compassBackgroundCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_BACK_IDC;
 _display setVariable [COMPASS_BACKGROUND_CTRL_VAR_STR,_compassBackgroundCtrl];
 
-private _compassCenterMarkersCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_CENTER;
+private _compassCenterMarkersCtrl = _mainCompassCtrlGroup controlsGroupCtrl COMPASS_CENTER_IDC;
 _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersCtrl];
 
 

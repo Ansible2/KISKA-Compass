@@ -1,9 +1,9 @@
 #include "Compass IDCs.hpp"
 #include "Compass Image Resolutions.hpp"
 
-import ctrlStaticPicture;
-import ctrlStaticPictureKeepAspect;
-import ctrlControlsGroupNoScrollbars;
+class ctrlStaticPicture;
+class ctrlStaticPictureKeepAspect;
+class ctrlControlsGroupNoScrollbars;
 
 class KISKA_compass_uiLayer {
 	idd = COMPASS_IDD;
@@ -16,7 +16,7 @@ class KISKA_compass_uiLayer {
 	class controls {
 
 		class compassGroup : ctrlControlsGroupNoScrollbars {
-			idc = COMPASS_GRP;
+			idc = COMPASS_GRP_IDC;
 
 			y = 0;
 			w = 0;
@@ -25,7 +25,7 @@ class KISKA_compass_uiLayer {
 
 			class controls {
 				class compassBackground : ctrlStaticPicture {
-					idc = COMPASS_BACK;
+					idc = COMPASS_BACK_IDC;
 
 					x = 0;
 					y = 0;
@@ -34,7 +34,7 @@ class KISKA_compass_uiLayer {
 				};
 
 				class compassPicture : ctrlStaticPictureKeepAspect {
-					idc = COMPASS_IMG;
+					idc = COMPASS_IMG_IDC;
 
 					x = -( MAX_COMPASS_WIDTH * pixelW );
 					y = 0;
@@ -43,7 +43,7 @@ class KISKA_compass_uiLayer {
 				};
 
 				class center : ctrlStaticPictureKeepAspect {
-					idc = COMPASS_CENTER;
+					idc = COMPASS_CENTER_IDC;
 
 					y = 0;
 					w = COMPASS_CENTER_MARKER_RES_W * pixelW;
