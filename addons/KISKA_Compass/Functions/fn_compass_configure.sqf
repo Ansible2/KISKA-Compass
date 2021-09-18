@@ -49,9 +49,9 @@ _display setVariable [COMPASS_CENTER_MARKERS_CTRL_VAR_STR,_compassCenterMarkersC
 
 [
 	[ _mainCompassCtrlGroup, true ],
-	[ _compassImageCtrl, false, KISKA_compass_mainColor, "images\compass_19.paa" ],
+	[ _compassImageCtrl, false, KISKA_compass_mainColor, KISKA_compass_image ],
 	[ _compassBackgroundCtrl, false, KISKA_compass_backgroundColor, "#(rgb,8,8,3)color(1,1,1,1)" ],
-	[ _compassCenterMarkersCtrl, false, KISKA_compass_centerColor, "images\center.paa" ]
+	[ _compassCenterMarkersCtrl, false, KISKA_compass_centerColor, KISKA_compass_center_image ]
 ] apply {
 	_x params [
 		"_ctrl",

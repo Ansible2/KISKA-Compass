@@ -16,7 +16,7 @@ Returns:
 
 Examples:
     (begin example)
-		[findDisplay 46] call KISKA_fnc_compass_mainLoop;
+		[findDisplay 46] spawn KISKA_fnc_compass_mainLoop;
     (end)
 
 Author:
@@ -26,6 +26,9 @@ scriptName "KISKA_fnc_compass_mainLoop";
 
 #define INACTIVE_IDC -1
 #define SIMPLIFY_ANGLE(angle) (((angle) % 360) + 360) % 360;
+
+// check if main menu
+if (allDisplays isEqualTo [findDisplay 0]) exitWith {};
 
 disableSerialization;
 
@@ -77,9 +80,6 @@ waitUntil {
 
 	_compass ctrlSetPositionX -( _posX * pixelW ); // scroll the compass
 	_compass ctrlCommit 0;
-
-
-
 
 
 

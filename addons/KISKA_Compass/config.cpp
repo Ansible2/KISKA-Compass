@@ -1,7 +1,25 @@
+class CfgPatches
+{
+	class KISKA_Compass
+	{
+		units[]={};
+		weapons[]={};
+		requiredVersion=0.1;
+		requiredAddons[]={
+			"cba_main"
+		};
+	};
+};
+
+
+class ctrlStaticPicture;
+class ctrlStaticPictureKeepAspect;
+class ctrlControlsGroupNoScrollbars;
 class RscTitles
 {
 	#include "Headers\Compass GUI Config.hpp"
 };
+
 
 class cfgFunctions
 {
@@ -10,7 +28,7 @@ class cfgFunctions
 
 		class Compass
 		{
-			file = "Functions";
+			file = "KISKA_Compass\Functions";
 
 			class compass_addIcon
 			{};
@@ -41,13 +59,13 @@ class KISKA_compass
 		class standard
 		{
 			title = "Standard";
-			image = "";
+			image = "\KISKA_Compass\Images\Compasses\Standard Compass.paa";
 		};
 
 		class ODST_compass
 		{
 			title = "ODST";
-			image = "";
+			image = "\KISKA_Compass\Images\Compasses\ODST Compass.paa";
 		};
 	};
 
@@ -56,7 +74,7 @@ class KISKA_compass
 		class standard_center
 		{
 			title = "Standard";
-			image = "";
+			image = "\KISKA_Compass\Images\Centers\standard center.paa";
 		};
 	};
 };

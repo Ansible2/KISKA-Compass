@@ -49,7 +49,7 @@ private _imagePathArray = [];
     };
 };
 
-_return = [_nameArray,_imagePathArray,0];
+_return = [_imagePathArray,_nameArray,0];
 uiNamespace setVariable [_varName,_return];
 
 

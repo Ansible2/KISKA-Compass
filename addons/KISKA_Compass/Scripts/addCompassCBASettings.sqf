@@ -20,7 +20,7 @@
         };
 
         if ( _show ) then {
-            (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutRsc [ COMPASS_LAYER_NAME, "PLAIN", -1, false ];
+            (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutRsc [ "KISKA_compass_rsc", "PLAIN", -1, false ];
 
         } else {
             (COMPASS_LAYER_NAME call BIS_fnc_rscLayer) cutText [ "", "PLAIN", -1, false ];
@@ -129,7 +129,7 @@ private _compassCenterListArray = [
 [
     "KISKA_compass_y_offset",
     "SLIDER",
-    ["Vertical Position Offset", "Adjusts how fart beneath the top of the screen your compass is."],
+    ["Vertical Position Offset", "Adjusts how far beneath the top of the screen your compass is."],
     ["KISKA Compass", "Scaling"],
     [0, 100, 1, 0],
     nil,
