@@ -149,7 +149,9 @@ waitUntil {
 					_y set [ ICON_CTRL, _iconControl ];
 
 				} else {
-					_iconControl ctrlShow true;
+					if !(ctrlShown _iconControl) then {
+						_iconControl ctrlShow true;
+					};
 
 					if ( (ctrlText _iconControl) isNotEqualTo _iconText) then {
 						_iconControl ctrlSetText _iconText;
@@ -168,7 +170,10 @@ waitUntil {
 
 				};
 			} else {
-				_iconControl ctrlShow false;
+				if (ctrlShown _iconControl) then {
+					_iconControl ctrlShow false;
+				};
+
 			};
 
 		};
